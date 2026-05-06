@@ -49,6 +49,54 @@ sudo apt install tesseract-ocr-deu
 
 ---
 
+## Standalone OCR Docker container
+
+A separate OCR application container is available in `docker/ocr/` and does
+not require Home Assistant.
+
+### Build
+
+```bash
+docker build -t ha-ocr-app -f docker/ocr/Dockerfile .
+```
+
+### Run
+
+```bash
+docker run --rm -p 8080:8080 --device /dev/video0:/dev/video0 ha-ocr-app
+```
+
+By default the server binds to `0.0.0.0` inside the container. For restricted
+exposure, set `OCR_APP_HOST=127.0.0.1` and publish only to trusted interfaces.
+
+### API
+
+- `GET /` → local web UI for testing OCR configuration
+- `GET /health` → health check
+- `POST /ocr` → capture + OCR + text comparison
+
+Example:
+
+```bash
+curl -X POST http://localhost:8080/ocr \
+  -H "Content-Type: application/json" \
+  -d '{
+    "device": "/dev/video0",
+    "roi": [0, 0, 0, 0],
+    "expected_texts": ["meter", "kwh"],
+    "ocr_lang": "eng"
+  }'
+```
+
+### Local web UI testing
+
+1. Start the container and open `http://localhost:8080/`.
+2. Set ROI / expected texts / OCR language in the form.
+3. Select **Input mode = Uploaded image** and choose a test image.
+4. Click **Run OCR test** to validate your configuration before HA integration.
+
+---
+
 ## Configuration
 
 | Field | Default | Description |
