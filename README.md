@@ -71,6 +71,7 @@ exposure, set `OCR_APP_HOST=127.0.0.1` and publish only to trusted interfaces.
 
 ### API
 
+- `GET /` → local web UI for testing OCR configuration
 - `GET /health` → health check
 - `POST /ocr` → capture + OCR + text comparison
 
@@ -86,6 +87,13 @@ curl -X POST http://localhost:8080/ocr \
     "ocr_lang": "eng"
   }'
 ```
+
+### Local web UI testing
+
+1. Start the container and open `http://localhost:8080/`.
+2. Set ROI / expected texts / OCR language in the form.
+3. Select **Input mode = Uploaded image** and choose a test image.
+4. Click **Run OCR test** to validate your configuration before HA integration.
 
 ---
 

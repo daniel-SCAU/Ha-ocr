@@ -82,6 +82,16 @@ def capture_and_analyze(
     """Capture, crop, OCR, and compare text in one operation."""
     _LOGGER.debug("Capturing image from %s with ROI %s", device, roi)
     frame = capture_image(device)
+    return analyze_frame(frame, roi=roi, expected_texts=expected_texts, ocr_lang=ocr_lang)
+
+
+def analyze_frame(
+    frame: Any,
+    roi: tuple[int, int, int, int],
+    expected_texts: list[str],
+    ocr_lang: str = "eng",
+) -> dict[str, Any]:
+    """Analyze an already-loaded frame with ROI, OCR, and text comparison."""
     cropped = crop_roi(frame, roi)
     ocr_text = run_ocr(cropped, lang=ocr_lang)
     _LOGGER.debug("OCR result: %r", ocr_text)
