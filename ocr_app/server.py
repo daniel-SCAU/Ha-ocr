@@ -81,9 +81,13 @@ class OcrRequestHandler(BaseHTTPRequestHandler):
                 expected_texts=expected_texts_raw,
                 ocr_lang=ocr_lang,
             )
-        except Exception as exc:  # noqa: BLE001
-            _LOGGER.exception("OCR processing failed")
-            self._send_json(500, {"error": str(exc)})
+        except RuntimeError as exc:
+            _LOGGER.warning("OCR request failed: %s", exc)
+            self._send_json(400, {"error": str(exc)})
+            return
+        except Exception:  # noqa: BLE001
+            _LOGGER.exception("Unexpected OCR processing failure")
+            self._send_json(500, {"error": "internal OCR processing error"})
             return
 
         self._send_json(200, result)

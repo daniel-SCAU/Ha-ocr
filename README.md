@@ -66,6 +66,9 @@ docker build -t ha-ocr-app -f docker/ocr/Dockerfile .
 docker run --rm -p 8080:8080 --device /dev/video0:/dev/video0 ha-ocr-app
 ```
 
+By default the server binds to `0.0.0.0` inside the container. For restricted
+exposure, set `OCR_APP_HOST=127.0.0.1` and publish only to trusted interfaces.
+
 ### API
 
 - `GET /health` → health check

@@ -13,7 +13,10 @@ def capture_image(device: str) -> Any:
 
     cap = cv2.VideoCapture(device)
     if not cap.isOpened():
-        raise RuntimeError(f"Cannot open camera device: {device}")
+        raise RuntimeError(
+            f"Cannot open camera device: {device}. "
+            "Check that the device exists, is accessible, and is not already in use."
+        )
     try:
         ret, frame = cap.read()
         if not ret or frame is None:
@@ -32,6 +35,15 @@ def crop_roi(frame: Any, roi: tuple[int, int, int, int]) -> Any:
         y1 = max(0, min(y, frame_h))
         x2 = max(0, min(x + w, frame_w))
         y2 = max(0, min(y + h, frame_h))
+        if (x1, y1, x2, y2) != (x, y, x + w, y + h):
+            _LOGGER.warning(
+                "ROI %s was clamped to frame bounds as (%s, %s, %s, %s)",
+                roi,
+                x1,
+                y1,
+                x2,
+                y2,
+            )
         return frame[y1:y2, x1:x2]
     return frame
 

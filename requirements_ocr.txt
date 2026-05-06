@@ -1,3 +1,4 @@
+# Keep parity with Home Assistant integration constraints to avoid known-bad wheels.
 opencv-python-headless>=4.5.0,!=4.10.0.84,!=4.11.0.86
 pytesseract>=0.3.10
 Pillow>=9.0.0
