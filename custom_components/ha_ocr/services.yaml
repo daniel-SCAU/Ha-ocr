@@ -1,0 +1,14 @@
+capture:
+  name: Capture
+  description: >
+    Trigger an OCR capture and analysis cycle from a configured USB camera.
+    Sensor states are updated with the new OCR text and match result.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: >
+        Config entry ID of the OCR integration instance to trigger.
+        When omitted all configured OCR integrations are triggered.
+      required: false
+      selector:
+        text: {}

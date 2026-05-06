@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure Ha OCR",
+        "description": "Set up OCR capture from a USB camera. Leave ROI width/height as 0 to use the full frame.",
+        "data": {
+          "device": "Camera device path",
+          "roi_x": "ROI X offset (pixels)",
+          "roi_y": "ROI Y offset (pixels)",
+          "roi_width": "ROI width (pixels, 0 = full frame)",
+          "roi_height": "ROI height (pixels, 0 = full frame)",
+          "expected_texts": "Expected texts (comma-separated)",
+          "ocr_lang": "Tesseract language code (e.g. eng, deu)"
+        }
+      }
+    },
+    "error": {
+      "roi_negative": "ROI coordinates must be non-negative integers."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Update Ha OCR settings",
+        "data": {
+          "device": "Camera device path",
+          "roi_x": "ROI X offset (pixels)",
+          "roi_y": "ROI Y offset (pixels)",
+          "roi_width": "ROI width (pixels, 0 = full frame)",
+          "roi_height": "ROI height (pixels, 0 = full frame)",
+          "expected_texts": "Expected texts (comma-separated)",
+          "ocr_lang": "Tesseract language code (e.g. eng, deu)"
+        }
+      }
+    },
+    "error": {
+      "roi_negative": "ROI coordinates must be non-negative integers."
+    }
+  }
+}
