@@ -17,7 +17,7 @@ _INDEX_HTML = """<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ha OCR Local Tester</title>
+  <title>HA OCR Local Tester</title>
   <style>
     body { font-family: sans-serif; margin: 24px; max-width: 920px; }
     .row { display: grid; grid-template-columns: repeat(2, minmax(220px, 1fr)); gap: 12px; }
@@ -29,7 +29,7 @@ _INDEX_HTML = """<!doctype html>
   </style>
 </head>
 <body>
-  <h1>Ha OCR Local Tester</h1>
+  <h1>HA OCR Local Tester</h1>
   <p class="muted">Use camera device or upload an image to test ROI/expected-text configuration locally.</p>
 
   <div class="row">
