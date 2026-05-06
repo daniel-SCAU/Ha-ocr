@@ -1,4 +1,4 @@
-# Ha-OCR — Home Assistant USB Camera OCR Integration
+# Ha OCR — Home Assistant USB Camera OCR Integration
 
 A Home Assistant custom integration that captures images from a USB camera,
 crops a configurable Region of Interest (ROI) with OpenCV, extracts text using

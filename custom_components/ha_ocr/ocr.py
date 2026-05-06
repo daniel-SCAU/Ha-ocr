@@ -53,13 +53,21 @@ def crop_roi(frame: Any, roi: tuple[int, int, int, int]) -> Any:
         frame: OpenCV BGR numpy array.
         roi: ``(x, y, width, height)``.  When *width* or *height* is ``0``
              the original frame is returned unchanged (full-frame mode).
+             Coordinates are clamped to the frame boundaries so that an
+             oversized ROI never raises an index error or returns an empty
+             array.
 
     Returns:
         Cropped frame, or the original frame when ROI dimensions are zero.
     """
     x, y, w, h = roi
     if w > 0 and h > 0:
-        return frame[y : y + h, x : x + w]
+        frame_h, frame_w = frame.shape[:2]
+        x1 = max(0, min(x, frame_w))
+        y1 = max(0, min(y, frame_h))
+        x2 = max(0, min(x + w, frame_w))
+        y2 = max(0, min(y + h, frame_h))
+        return frame[y1:y2, x1:x2]
     return frame
 
 

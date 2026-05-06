@@ -136,6 +136,20 @@ class TestCropRoi:
         result = crop_roi(frame, (0, 0, 0, 0))
         assert result is frame
 
+    def test_crop_roi_clamped_to_frame_width(self):
+        """ROI that extends beyond the right edge is clamped to frame width."""
+        frame = np.zeros((480, 640, 3), dtype=np.uint8)
+        # x=600, width=100 → x+w=700, but frame is only 640 wide
+        result = crop_roi(frame, (600, 0, 100, 50))
+        assert result.shape[1] == 40  # 640 - 600
+
+    def test_crop_roi_clamped_to_frame_height(self):
+        """ROI that extends beyond the bottom edge is clamped to frame height."""
+        frame = np.zeros((480, 640, 3), dtype=np.uint8)
+        # y=460, height=100 → y+h=560, but frame is only 480 tall
+        result = crop_roi(frame, (0, 460, 100, 100))
+        assert result.shape[0] == 20  # 480 - 460
+
 
 # ---------------------------------------------------------------------------
 # run_ocr
@@ -256,14 +270,6 @@ class TestCompareText:
 
 class TestCaptureAndAnalyze:
     """End-to-end tests for :func:`capture_and_analyze`."""
-
-    def _make_mocks(self, ocr_output: str):
-        """Return a context manager tuple that patches all external I/O."""
-        mock_frame = np.zeros((480, 640, 3), dtype=np.uint8)
-        mock_cap = MagicMock()
-        mock_cap.isOpened.return_value = True
-        mock_cap.read.return_value = (True, mock_frame)
-        return mock_frame, mock_cap, ocr_output
 
     def test_full_pipeline_with_match(self):
         """Full pipeline returns OCR text and correct match result."""

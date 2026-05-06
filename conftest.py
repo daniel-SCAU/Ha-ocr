@@ -105,7 +105,7 @@ class _ServiceCall:
 
 _core.HomeAssistant = _HomeAssistant
 _core.ServiceCall = _ServiceCall
-_core.callback = lambda f: f  # decorator pass-through
+_core.callback = lambda func: func  # decorator pass-through
 
 # ---------------------------------------------------------------------------
 # homeassistant.helpers.update_coordinator
