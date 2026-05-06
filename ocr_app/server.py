@@ -238,7 +238,11 @@ class OcrRequestHandler(BaseHTTPRequestHandler):
             self._send_json(400, {"error": str(exc)})
             return
         except OSError as exc:
-            self._send_json(400, {"error": str(exc)})
+            _LOGGER.warning("OCR runtime environment error: %s", exc)
+            self._send_json(
+                500,
+                {"error": f"ocr runtime environment error: {exc}"},
+            )
             return
         except RuntimeError as exc:
             _LOGGER.warning("OCR request failed: %s", exc)
