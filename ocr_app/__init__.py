@@ -1,0 +1,1 @@
+"""Standalone OCR application package."""
