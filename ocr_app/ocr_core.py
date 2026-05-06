@@ -15,7 +15,8 @@ def capture_image(device: str) -> Any:
     if not cap.isOpened():
         raise RuntimeError(
             f"Cannot open camera device: {device}. "
-            "Check that the device exists, is accessible, and is not already in use."
+            "Check that the device exists, is accessible, and is not already in use. "
+            "If available, run 'v4l2-ctl --list-devices' to verify camera nodes."
         )
     try:
         ret, frame = cap.read()
@@ -61,6 +62,8 @@ def run_ocr(frame: Any, lang: str = "eng") -> str:
 
 def compare_text(ocr_text: str, expected_texts: list[str]) -> dict[str, Any]:
     """Compare OCR text to expected patterns (case-insensitive substring match)."""
+    if any(t == "" for t in expected_texts):
+        _LOGGER.warning("Ignoring empty string entries in expected_texts")
     ocr_lower = ocr_text.lower()
     matched = [t for t in expected_texts if t and t.lower() in ocr_lower]
     return {
