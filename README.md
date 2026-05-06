@@ -33,7 +33,7 @@ sudo apt install tesseract-ocr-deu
 
 ### Python packages (installed automatically by Home Assistant)
 
-- `opencv-python-headless >= 4.5.0, != 4.11.0.86`
+- `opencv-python-headless >= 4.5.0, != 4.10.0.84, != 4.11.0.86`
 - `pytesseract >= 0.3.10`
 - `Pillow >= 9.0.0`
 
