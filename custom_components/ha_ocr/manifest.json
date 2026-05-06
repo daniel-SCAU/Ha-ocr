@@ -1,0 +1,16 @@
+{
+  "domain": "ha_ocr",
+  "name": "Ha OCR",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/daniel-SCAU/Ha-ocr",
+  "issue_tracker": "https://github.com/daniel-SCAU/Ha-ocr/issues",
+  "requirements": [
+    "opencv-python-headless>=4.5.0",
+    "pytesseract>=0.3.10",
+    "Pillow>=9.0.0"
+  ],
+  "codeowners": ["@daniel-SCAU"],
+  "iot_class": "local_polling",
+  "dependencies": []
+}
